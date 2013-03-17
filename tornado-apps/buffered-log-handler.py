@@ -26,7 +26,7 @@ class BufferedLogHandler(handlers.BufferingHandler):
 
         """
         self.buffer.append(self.format(record))
-        while len(self.buffer) >= self.capacity:
+        while len(''.join(self.buffer)) >= self.capacity:
             self.buffer.remove(0)
 
 
