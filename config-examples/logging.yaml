@@ -1,0 +1,30 @@
+Logging:
+  formatters:
+    brief:
+      format: "%(levelname)s <PID %(process)d:%(processName)s> %(name)s.%(funcName)s(): %(message)s"
+  filters: []
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: brief
+    syslog:
+      class: logging.handlers.SysLogHandler
+      facility: daemon
+      address: /dev/log
+      formatter: brief
+  loggers:
+    django:
+      propagate: true
+      level: WARNING
+      handlers: [console, syslog]
+    psycopg2:
+       propagate: false
+       level: ERROR
+       handlers: [console, syslog]
+  ROOT:
+    propagate: true
+    level: WARNING
+    handlers: [console, syslog]
+  disable_existing_loggers: true
+  incremental: false
+  version: 1
